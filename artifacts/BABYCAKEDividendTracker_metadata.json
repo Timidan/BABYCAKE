@@ -1,0 +1,1139 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "bool",
+						"name": "automatic",
+						"type": "bool"
+					}
+				],
+				"name": "Claim",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "newValue",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "oldValue",
+						"type": "uint256"
+					}
+				],
+				"name": "ClaimWaitUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "weiAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "DividendWithdrawn",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "weiAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "DividendsDistributed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "ExcludeFromDividends",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "CAKE",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Monsta",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "accumulativeDividendOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "c",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claimWait",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "subtractedValue",
+						"type": "uint256"
+					}
+				],
+				"name": "decreaseAllowance",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "distributeCAKEDividends",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "dividendOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "excludeFromDividends",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "excludedFromDividends",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_account",
+						"type": "address"
+					}
+				],
+				"name": "getAccount",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "int256",
+						"name": "index",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "iterationsUntilProcessed",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "withdrawableDividends",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalDividends",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "lastClaimTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nextClaimTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "secondsUntilAutoClaimAvailable",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "getAccountAtIndex",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getLastProcessedIndex",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getNumberOfTokenHolders",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "addedValue",
+						"type": "uint256"
+					}
+				],
+				"name": "increaseAllowance",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "lastClaimTimes",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "lastProcessedIndex",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "minimumTokenBalanceForDividends",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "gas",
+						"type": "uint256"
+					}
+				],
+				"name": "process",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "automatic",
+						"type": "bool"
+					}
+				],
+				"name": "processAccount",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "newBalance",
+						"type": "uint256"
+					}
+				],
+				"name": "setBalance",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalDividendsDistributed",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newClaimWait",
+						"type": "uint256"
+					}
+				],
+				"name": "updateClaimWait",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawDividend",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "withdrawableDividendOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "withdrawnDividendOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"accumulativeDividendOf(address)": {
+					"details": "accumulativeDividendOf(_owner) = withdrawableDividendOf(_owner) + withdrawnDividendOf(_owner) = (magnifiedDividendPerShare * balanceOf(_owner) + magnifiedDividendCorrections[_owner]) / magnitude",
+					"params": {
+						"_owner": "The address of a token holder."
+					},
+					"returns": {
+						"_0": "The amount of dividend in wei that `_owner` has earned in total."
+					}
+				},
+				"allowance(address,address)": {
+					"details": "See {IERC20-allowance}."
+				},
+				"approve(address,uint256)": {
+					"details": "See {IERC20-approve}. Requirements: - `spender` cannot be the zero address."
+				},
+				"balanceOf(address)": {
+					"details": "See {IERC20-balanceOf}."
+				},
+				"decimals()": {
+					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless this function is overridden; NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
+				},
+				"decreaseAllowance(address,uint256)": {
+					"details": "Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`."
+				},
+				"dividendOf(address)": {
+					"params": {
+						"_owner": "The address of a token holder."
+					},
+					"returns": {
+						"_0": "The amount of dividend in wei that `_owner` can withdraw."
+					}
+				},
+				"increaseAllowance(address,uint256)": {
+					"details": "Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address."
+				},
+				"name()": {
+					"details": "Returns the name of the token."
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
+				"symbol()": {
+					"details": "Returns the symbol of the token, usually a shorter version of the name."
+				},
+				"totalSupply()": {
+					"details": "See {IERC20-totalSupply}."
+				},
+				"transfer(address,uint256)": {
+					"details": "See {IERC20-transfer}. Requirements: - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}. Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for ``sender``'s tokens of at least `amount`."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				},
+				"withdrawDividend()": {
+					"details": "It emits a `DividendWithdrawn` event if the amount of withdrawn ether is greater than 0."
+				},
+				"withdrawableDividendOf(address)": {
+					"params": {
+						"_owner": "The address of a token holder."
+					},
+					"returns": {
+						"_0": "The amount of dividend in wei that `_owner` can withdraw."
+					}
+				},
+				"withdrawnDividendOf(address)": {
+					"params": {
+						"_owner": "The address of a token holder."
+					},
+					"returns": {
+						"_0": "The amount of dividend in wei that `_owner` has withdrawn."
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"accumulativeDividendOf(address)": {
+					"notice": "View the amount of dividend in wei that an address has earned in total."
+				},
+				"dividendOf(address)": {
+					"notice": "View the amount of dividend in wei that an address can withdraw."
+				},
+				"withdrawDividend()": {
+					"notice": "Withdraws the ether distributed to the sender."
+				},
+				"withdrawableDividendOf(address)": {
+					"notice": "View the amount of dividend in wei that an address can withdraw."
+				},
+				"withdrawnDividendOf(address)": {
+					"notice": "View the amount of dividend in wei that an address has withdrawn."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Monsta.sol": "BABYCAKEDividendTracker"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Context.sol": {
+			"keccak256": "0x2bfee1b62dd98b0558681cb9428ef6ac972433cb68faaacc33a70a8bd221fadc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1754beb271b4f01fb27a92d7aadc97b588a7d4c3dc4baac35b9a70408f899ccb",
+				"dweb:/ipfs/QmRf3v2AFo8utJGcTJmwPDqvWjLkXajZYo3yMTCgpWYKuz"
+			]
+		},
+		"DividendPayingToken.sol": {
+			"keccak256": "0xfc99a24cfd107d4bca78453b536e75b3c921149e5d0868bbbee716f63e86d1ef",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4aa5743c8f1cd5a342d04f3ca64dbb8f9550f5ec35966e791e6a780202076c2d",
+				"dweb:/ipfs/QmWNoqTs9D2ifq26qYYtkg6CZHq2QtD3c9DBzUfLYFrNYx"
+			]
+		},
+		"DividendPayingTokenInterface.sol": {
+			"keccak256": "0x01869ea92fb8bed85e959f799a8f6fb2fa63464d957c6b1639d9e970ef5f1e12",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://63d42852fa3278b2eadd8e40eb814205cedcfd45f7ab92f185f16c5eb7fe5693",
+				"dweb:/ipfs/QmRVH2qkpsgthpRHTkjMysw3Gk9718GnXtf1wMwPVKrB2T"
+			]
+		},
+		"DividendPayingTokenOptionalInterface.sol": {
+			"keccak256": "0x7681246d5df44b86886663744f90864b2f52ec9db4aa6feb05c126178c99a71c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9e6a7f00ef355e0872a02759dbaec1bf60db30d0db44cd3336565582260c471c",
+				"dweb:/ipfs/QmQb7GqRQV2m5dofFFUYYAThWSg7aUErGoZwMki3jDRwwp"
+			]
+		},
+		"ERC20.sol": {
+			"keccak256": "0xc4da424c399e963ac694ed3c07c9c000d37ed7cdeb234dd27714dfead62bf599",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5b3c9fcefb68dddd7bf6c6f2f30a44adb49d35df61262497267bebeb624dcf6d",
+				"dweb:/ipfs/QmfAJrHchjPHwcjSbzWyzJuvsRWUDWdrUnJACFLahZc4D8"
+			]
+		},
+		"IERC20.sol": {
+			"keccak256": "0x5fb7e501e7542c237101e03cc9f3e56d8812cfe95872017300c13c5c23352c82",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://207e571110a865c35c91fce35ee0eba434b5e2309510c7a36dc693fa0d44c2d6",
+				"dweb:/ipfs/QmT9pmkME8q7D7eSS37ZKbaaWUnQTYpt6dATjZgirmX2BV"
+			]
+		},
+		"IERC20Metadata.sol": {
+			"keccak256": "0x46d83945c75429345dbdcae90f62764a825f913086354d9e9198fdeb71dbbb9c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9523f861e3488d33d8ca7bf3d83f8c9d1234809c413b3f9d3394e6f6aeec303e",
+				"dweb:/ipfs/QmbgGLk1wojrsgGu3XoX1PHN5wdh3NikHKJim394NTR262"
+			]
+		},
+		"IUniswapV2Factory.sol": {
+			"keccak256": "0x2162377d397e442682837c2cd7193605b4326d37008f3242898e2e4e00fcab52",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c6ed3647aef960326e9a34ae65c5bb37cecd1817225dc6861b34c7ffd46014ac",
+				"dweb:/ipfs/Qmc99HkNC9sDZK4uCuxNqbWC3mLKQMXvbpzpRFK87MpAgj"
+			]
+		},
+		"IUniswapV2Pair.sol": {
+			"keccak256": "0xbd059a408790876fa9b3342236e9436404a23d05fb7163fb830604b29441c199",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://23efb94268ba6f87d6f0bd80d9cb43e8219d833574e605be8355f8b8c3ecf397",
+				"dweb:/ipfs/QmZhCRx15ZFC3i8f8nVUz8mBdXukwodvAazFykGeaqrkVF"
+			]
+		},
+		"IUniswapV2Router.sol": {
+			"keccak256": "0xb5373014e93b10068697dbbfa024b8f9e7d364871722e7fd818c97620e0817af",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6ef0e2967707683e5afa2bd07d2e87016e0c2737b9f364d447f70212f279bad7",
+				"dweb:/ipfs/Qmenh5DnGyonatv2juVaVKeAmC31BNDT5SWBwU348uSB3K"
+			]
+		},
+		"IterableMapping.sol": {
+			"keccak256": "0x78e63d3ab900b29dd0821b38104c8b5861edd6d759b43ba5b5913fdff6929069",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://91eeea72eb19363f34f82a0bc4ee3fc00a8f514fb5203f271ec61489935cb0b6",
+				"dweb:/ipfs/QmdDTBFkqPkmn64X7BEYAozSzbDWquptCiJ2UYLsTnhDat"
+			]
+		},
+		"Monsta.sol": {
+			"keccak256": "0xbe1007791f6b6d70064092e2d14ba35b7d0fef31b2d2016efb2ea85bf3cc3ff1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6e2d97ed49ad5d145c549a71c849e8c30b705e6607327b00918e128566062808",
+				"dweb:/ipfs/QmTs3VhgdtTa2GYH5Dn9U6SfTLaMHDGVLVvbyGKcmS12Xy"
+			]
+		},
+		"Ownable.sol": {
+			"keccak256": "0xda6c392cee9da1fa331b00cb4d127bf27ec00f2bd64e0887ce2fff43ca9d3747",
+			"license": "MIT License",
+			"urls": [
+				"bzz-raw://2ec582529796922b79b6fb5235637ac8678e734ea7d245bef96dcafe5104ba96",
+				"dweb:/ipfs/QmWspqAWg2gbVQfqyYUoZCDhtSABuocHQ81TH1KKUW92JT"
+			]
+		},
+		"SafeMath.sol": {
+			"keccak256": "0x6d26cf7be1f1bc0678f06849575acbe0314513135adb03799a9554748f04ecfc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8249fec945bad7f5ab24877ce675d139b978f7b46fb4e631b584e0e4185a0368",
+				"dweb:/ipfs/QmTc8hj9hcY6N6amV3bx5QRTqPnhaLfdYwXSgHMH3Kyioy"
+			]
+		},
+		"SafeMathInt.sol": {
+			"keccak256": "0xd741644275fdbc489ab1f457868cb8fb94fb4c2d9e539cfcf2bf79b76214f7ab",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0f9b06181930db735589b93afd67df2014a645f889b0ab250373fc723f26d0ea",
+				"dweb:/ipfs/QmQJLacM6P5u3P7fRgpYDmFH9bHjq7m6hFKQFtzCi6LjUZ"
+			]
+		},
+		"SafeMathUint.sol": {
+			"keccak256": "0x2e6b561e85049defbc1cdc7eac94786f641743451eb3c37568581cf5905d21ae",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c243a2b058dc749818d9960d1eac27df228f17ce217ec7d8ef004f8605c3cc11",
+				"dweb:/ipfs/QmcJddtWBAX789Z91UKBBjKz1aXbj7ZcLRddAmrvUXn79R"
+			]
+		}
+	},
+	"version": 1
+}
