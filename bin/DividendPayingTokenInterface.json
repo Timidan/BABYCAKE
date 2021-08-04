@@ -1,0 +1,417 @@
+{
+    "contractName": "DividendPayingTokenInterface",
+    "abi": [
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "weiAmount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "DividendWithdrawn",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "weiAmount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "DividendsDistributed",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_owner",
+                    "type": "address"
+                }
+            ],
+            "name": "dividendOf",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "withdrawDividend",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"weiAmount\",\"type\":\"uint256\"}],\"name\":\"DividendWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"weiAmount\",\"type\":\"uint256\"}],\"name\":\"DividendsDistributed\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"dividendOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawDividend\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Roger Wu (https://github.com/roger-wu)\",\"details\":\"An interface for a dividend-paying token contract.\",\"events\":{\"DividendWithdrawn(address,uint256)\":{\"details\":\"This event MUST emit when an address withdraws their dividend.\",\"params\":{\"to\":\"The address which withdraws ether from this contract.\",\"weiAmount\":\"The amount of withdrawn ether in wei.\"}},\"DividendsDistributed(address,uint256)\":{\"details\":\"This event MUST emit when ether is distributed to token holders.\",\"params\":{\"from\":\"The address which sends ether to this contract.\",\"weiAmount\":\"The amount of distributed ether in wei.\"}}},\"kind\":\"dev\",\"methods\":{\"dividendOf(address)\":{\"params\":{\"_owner\":\"The address of a token holder.\"},\"returns\":{\"_0\":\"The amount of dividend in wei that `_owner` can withdraw.\"}},\"withdrawDividend()\":{\"details\":\"SHOULD transfer `dividendOf(msg.sender)` wei to `msg.sender`, and `dividendOf(msg.sender)` SHOULD be 0 after the transfer.  MUST emit a `DividendWithdrawn` event if the amount of ether transferred is greater than 0.\"}},\"title\":\"Dividend-Paying Token Interface\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"dividendOf(address)\":{\"notice\":\"View the amount of dividend in wei that an address can withdraw.\"},\"withdrawDividend()\":{\"notice\":\"Withdraws the ether distributed to the sender.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/null/Desktop/BABYCAKE/DividendPayingTokenInterface.sol\":\"DividendPayingTokenInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/null/Desktop/BABYCAKE/DividendPayingTokenInterface.sol\":{\"keccak256\":\"0x01869ea92fb8bed85e959f799a8f6fb2fa63464d957c6b1639d9e970ef5f1e12\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://63d42852fa3278b2eadd8e40eb814205cedcfd45f7ab92f185f16c5eb7fe5693\",\"dweb:/ipfs/QmRVH2qkpsgthpRHTkjMysw3Gk9718GnXtf1wMwPVKrB2T\"]}},\"version\":1}",
+    "bytecode": "",
+    "deployedBytecode": "",
+    "sourceMap": "",
+    "deployedSourceMap": "",
+    "sourcePath": "/home/null/Desktop/BABYCAKE/DividendPayingTokenInterface.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.6.12+commit.27d51765"
+    },
+    "ast": {
+        "absolutePath": "/home/null/Desktop/BABYCAKE/DividendPayingTokenInterface.sol",
+        "exportedSymbols": {
+            "DividendPayingTokenInterface": [
+                528
+            ]
+        },
+        "id": 529,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 500,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.6",
+                    ".2"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "35:23:2"
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "contractDependencies": [],
+                "contractKind": "interface",
+                "documentation": {
+                    "id": 501,
+                    "nodeType": "StructuredDocumentation",
+                    "src": "64:157:2",
+                    "text": "@title Dividend-Paying Token Interface\n @author Roger Wu (https://github.com/roger-wu)\n @dev An interface for a dividend-paying token contract."
+                },
+                "fullyImplemented": false,
+                "id": 528,
+                "linearizedBaseContracts": [
+                    528
+                ],
+                "name": "DividendPayingTokenInterface",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "body": null,
+                        "documentation": {
+                            "id": 502,
+                            "nodeType": "StructuredDocumentation",
+                            "src": "265:201:2",
+                            "text": "@notice View the amount of dividend in wei that an address can withdraw.\n @param _owner The address of a token holder.\n @return The amount of dividend in wei that `_owner` can withdraw."
+                        },
+                        "functionSelector": "91b89fba",
+                        "id": 509,
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "dividendOf",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": null,
+                        "parameters": {
+                            "id": 505,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 504,
+                                    "mutability": "mutable",
+                                    "name": "_owner",
+                                    "nodeType": "VariableDeclaration",
+                                    "overrides": null,
+                                    "scope": 509,
+                                    "src": "490:14:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 503,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "490:7:2",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "value": null,
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "489:16:2"
+                        },
+                        "returnParameters": {
+                            "id": 508,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 507,
+                                    "mutability": "mutable",
+                                    "name": "",
+                                    "nodeType": "VariableDeclaration",
+                                    "overrides": null,
+                                    "scope": 509,
+                                    "src": "528:7:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 506,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "528:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "value": null,
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "527:9:2"
+                        },
+                        "scope": 528,
+                        "src": "470:67:2",
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "body": null,
+                        "documentation": {
+                            "id": 510,
+                            "nodeType": "StructuredDocumentation",
+                            "src": "545:293:2",
+                            "text": "@notice Withdraws the ether distributed to the sender.\n @dev SHOULD transfer `dividendOf(msg.sender)` wei to `msg.sender`, and `dividendOf(msg.sender)` SHOULD be 0 after the transfer.\n  MUST emit a `DividendWithdrawn` event if the amount of ether transferred is greater than 0."
+                        },
+                        "functionSelector": "6a474002",
+                        "id": 513,
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "withdrawDividend",
+                        "nodeType": "FunctionDefinition",
+                        "overrides": null,
+                        "parameters": {
+                            "id": 511,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "867:2:2"
+                        },
+                        "returnParameters": {
+                            "id": 512,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "878:0:2"
+                        },
+                        "scope": 528,
+                        "src": "842:37:2",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "anonymous": false,
+                        "documentation": {
+                            "id": 514,
+                            "nodeType": "StructuredDocumentation",
+                            "src": "885:204:2",
+                            "text": "@dev This event MUST emit when ether is distributed to token holders.\n @param from The address which sends ether to this contract.\n @param weiAmount The amount of distributed ether in wei."
+                        },
+                        "id": 520,
+                        "name": "DividendsDistributed",
+                        "nodeType": "EventDefinition",
+                        "parameters": {
+                            "id": 519,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 516,
+                                    "indexed": true,
+                                    "mutability": "mutable",
+                                    "name": "from",
+                                    "nodeType": "VariableDeclaration",
+                                    "overrides": null,
+                                    "scope": 520,
+                                    "src": "1126:20:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 515,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1126:7:2",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "value": null,
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 518,
+                                    "indexed": false,
+                                    "mutability": "mutable",
+                                    "name": "weiAmount",
+                                    "nodeType": "VariableDeclaration",
+                                    "overrides": null,
+                                    "scope": 520,
+                                    "src": "1153:17:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 517,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1153:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "value": null,
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1119:56:2"
+                        },
+                        "src": "1093:83:2"
+                    },
+                    {
+                        "anonymous": false,
+                        "documentation": {
+                            "id": 521,
+                            "nodeType": "StructuredDocumentation",
+                            "src": "1182:204:2",
+                            "text": "@dev This event MUST emit when an address withdraws their dividend.\n @param to The address which withdraws ether from this contract.\n @param weiAmount The amount of withdrawn ether in wei."
+                        },
+                        "id": 527,
+                        "name": "DividendWithdrawn",
+                        "nodeType": "EventDefinition",
+                        "parameters": {
+                            "id": 526,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 523,
+                                    "indexed": true,
+                                    "mutability": "mutable",
+                                    "name": "to",
+                                    "nodeType": "VariableDeclaration",
+                                    "overrides": null,
+                                    "scope": 527,
+                                    "src": "1420:18:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                    },
+                                    "typeName": {
+                                        "id": 522,
+                                        "name": "address",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1420:7:2",
+                                        "stateMutability": "nonpayable",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "value": null,
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 525,
+                                    "indexed": false,
+                                    "mutability": "mutable",
+                                    "name": "weiAmount",
+                                    "nodeType": "VariableDeclaration",
+                                    "overrides": null,
+                                    "scope": 527,
+                                    "src": "1445:17:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 524,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "1445:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "value": null,
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "1413:54:2"
+                        },
+                        "src": "1390:78:2"
+                    }
+                ],
+                "scope": 529,
+                "src": "221:1250:2"
+            }
+        ],
+        "src": "35:1438:2"
+    },
+    "functionHashes": {
+        "dividendOf(address)": "91b89fba",
+        "withdrawDividend()": "6a474002"
+    },
+    "gasEstimates": null
+}

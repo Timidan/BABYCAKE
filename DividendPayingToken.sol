@@ -22,7 +22,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
   using SafeMathInt for int256;
 
   address public immutable CAKE = address(0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82); //CAKE
-  address public Monsta;
+  address public Monsta=address(0x8A5d7FCD4c90421d21d30fCC4435948aC3618B2f); //MONSTA
   //true==cake.false==monsta
   bool public c;
 
@@ -49,8 +49,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
 
   uint256 public totalDividendsDistributed;
 
-  constructor(string memory _name, string memory _symbol,address _monsta) public ERC20(_name, _symbol) {
-  Monsta=_monsta;
+  constructor(string memory _name, string memory _symbol) public ERC20(_name, _symbol) {
   }
 
 

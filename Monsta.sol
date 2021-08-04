@@ -25,13 +25,14 @@ contract MonstaC is ERC20, Ownable {
     address public deadWallet = 0x000000000000000000000000000000000000dEaD;
 
     address public immutable CAKE = address(0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82); //CAKE
-    address public Monsta=address(this);
+    address public immutable MONSTA= address(0x8A5d7FCD4c90421d21d30fCC4435948aC3618B2f); //MONSTA
+
 
     uint256 public swapTokensAtAmount = 2000000 * (10**18);
     
     mapping(address => bool) public _isBlacklisted;
 
-    uint256 public CAKERewardsFee = 5;
+    uint256 public CAKERewardsFee = 5;//will also be used for Monsta
     uint256 public liquidityFee = 3;
     uint256 public marketingFee = 3;
     uint256 public totalFees = CAKERewardsFee.add(liquidityFee).add(marketingFee);
@@ -83,7 +84,7 @@ contract MonstaC is ERC20, Ownable {
     	address indexed processor
     );
 
-    constructor() public ERC20("Monsta", "MST") {
+    constructor() public ERC20("MONSTA", "MST") {
 
     	dividendTracker = new BABYCAKEDividendTracker();
 
@@ -122,11 +123,11 @@ contract MonstaC is ERC20, Ownable {
   	}
 
     function updateDividendTracker(address newAddress) public onlyOwner {
-        require(newAddress != address(dividendTracker), "Monsta: The dividend tracker already has that address");
+        require(newAddress != address(dividendTracker), "MONSTA: The dividend tracker already has that address");
 
         BABYCAKEDividendTracker newDividendTracker = BABYCAKEDividendTracker(payable(newAddress));
 
-        require(newDividendTracker.owner() == address(this), "Monsta: The new dividend tracker must be owned by the Monsta token contract");
+        require(newDividendTracker.owner() == address(this), "MONSTA: The new dividend tracker must be owned by the MONSTA token contract");
 
         newDividendTracker.excludeFromDividends(address(newDividendTracker));
         newDividendTracker.excludeFromDividends(address(this));
@@ -139,7 +140,7 @@ contract MonstaC is ERC20, Ownable {
     }
 
     function updateUniswapV2Router(address newAddress) public onlyOwner {
-        require(newAddress != address(uniswapV2Router), "Monsta: The router already has that address");
+        require(newAddress != address(uniswapV2Router), "MONSTA: The router already has that address");
         emit UpdateUniswapV2Router(newAddress, address(uniswapV2Router));
         uniswapV2Router = IUniswapV2Router02(newAddress);
         address _uniswapV2Pair = IUniswapV2Factory(uniswapV2Router.factory())
@@ -148,7 +149,7 @@ contract MonstaC is ERC20, Ownable {
     }
 
     function excludeFromFees(address account, bool excluded) public onlyOwner {
-        require(_isExcludedFromFees[account] != excluded, "Monsta: Account is already the value of 'excluded'");
+        require(_isExcludedFromFees[account] != excluded, "MONSTA: Account is already the value of 'excluded'");
         _isExcludedFromFees[account] = excluded;
 
         emit ExcludeFromFees(account, excluded);
@@ -184,7 +185,7 @@ contract MonstaC is ERC20, Ownable {
 
 
     function setAutomatedMarketMakerPair(address pair, bool value) public onlyOwner {
-        require(pair != uniswapV2Pair, "Monsta: The PancakeSwap pair cannot be removed from automatedMarketMakerPairs");
+        require(pair != uniswapV2Pair, "MONSTA: The PancakeSwap pair cannot be removed from automatedMarketMakerPairs");
 
         _setAutomatedMarketMakerPair(pair, value);
     }
@@ -195,7 +196,7 @@ contract MonstaC is ERC20, Ownable {
 
 
     function _setAutomatedMarketMakerPair(address pair, bool value) private {
-        require(automatedMarketMakerPairs[pair] != value, "Monsta: Automated market maker pair is already set to that value");
+        require(automatedMarketMakerPairs[pair] != value, "MONSTA: Automated market maker pair is already set to that value");
         automatedMarketMakerPairs[pair] = value;
 
         if(value) {
@@ -207,8 +208,8 @@ contract MonstaC is ERC20, Ownable {
 
 
     function updateGasForProcessing(uint256 newValue) public onlyOwner {
-        require(newValue >= 200000 && newValue <= 500000, "Monsta: gasForProcessing must be between 200,000 and 500,000");
-        require(newValue != gasForProcessing, "Monsta: Cannot update gasForProcessing to same value");
+        require(newValue >= 200000 && newValue <= 500000, "MONSTA: gasForProcessing must be between 200,000 and 500,000");
+        require(newValue != gasForProcessing, "MONSTA: Cannot update gasForProcessing to same value");
         emit GasForProcessingUpdated(newValue, gasForProcessing);
         gasForProcessing = newValue;
     }
@@ -359,13 +360,22 @@ contract MonstaC is ERC20, Ownable {
     }
 
     function swapAndSendToFee(uint256 tokens) private  {
-
         uint256 initialCAKEBalance = IERC20(CAKE).balanceOf(address(this));
-        //only swap half of the tokens for cake
-        swapTokensForCake(tokens.div(2));
+        uint256 initialMonstaBalance=IERC20(MONSTA).balanceOf(address(this));
+        if(c){
+        swapTokensForCake(tokens);
         uint256 newBalance = (IERC20(CAKE).balanceOf(address(this))).sub(initialCAKEBalance);
         IERC20(CAKE).transfer(_marketingWalletAddress, newBalance);
+        c=false;
     }
+    if(!c){
+    swapTokensForMonsta(tokens);
+        uint256 newBalance = (IERC20(MONSTA).balanceOf(address(this))).sub(initialMonstaBalance);
+        IERC20(MONSTA).transfer(_marketingWalletAddress, newBalance);
+    }
+    }
+
+
 
     function swapAndLiquify(uint256 tokens) private {
        // split the contract balance into halves
@@ -430,6 +440,25 @@ contract MonstaC is ERC20, Ownable {
             block.timestamp
         );
     }
+    function swapTokensForMonsta(uint256 tokenAmount) private {
+
+        address[] memory path = new address[](3);
+        path[0] = address(this);
+        path[1] = uniswapV2Router.WETH();
+        path[2] = MONSTA;
+
+        _approve(address(this), address(uniswapV2Router), tokenAmount);
+
+        // make the swap
+        uniswapV2Router.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0,
+            path,
+            address(this),
+            block.timestamp
+        );
+    }
+
 
     function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
 
@@ -461,8 +490,9 @@ contract MonstaC is ERC20, Ownable {
 
     }
     if(!c){
-uint256 dividends = IERC20(Monsta).balanceOf(address(this));
-        bool success = IERC20(Monsta).transfer(address(dividendTracker), dividends);
+        swapTokensForMonsta(tokens);
+uint256 dividends = IERC20(MONSTA).balanceOf(address(this));
+        bool success = IERC20(MONSTA).transfer(address(dividendTracker), dividends);
         c=true;
          if (success) {
             dividendTracker.distributeCAKEDividends(dividends);
@@ -497,7 +527,7 @@ contract BABYCAKEDividendTracker is Ownable, DividendPayingToken {
 
     event Claim(address indexed account, uint256 amount, bool indexed automatic);
 
-    constructor() public DividendPayingToken("Monsta_Dividend_Tracker", "Monsta_Dividend_Tracker",address(this)) {
+    constructor() public DividendPayingToken("Monsta_Dividend_Tracker", "Monsta_Dividend_Tracker") {
     	claimWait = 1200;
         minimumTokenBalanceForDividends = 200000 * (10**18); //must hold 200000+ tokens
     }
@@ -507,7 +537,7 @@ contract BABYCAKEDividendTracker is Ownable, DividendPayingToken {
     }
 
     function withdrawDividend() public override {
-        require(false, "Monsta_Dividend_Tracker: withdrawDividend disabled. Use the 'claim' function on the main Monsta contract.");
+        require(false, "Monsta_Dividend_Tracker: withdrawDividend disabled. Use the 'claim' function on the main MONSTA contract.");
     }
 
     function excludeFromDividends(address account) external onlyOwner {
