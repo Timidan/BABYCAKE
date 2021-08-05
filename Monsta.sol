@@ -93,11 +93,13 @@ contract MonstaC is ERC20, Ownable {
          // Create a uniswap pair for this new token
         address _uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
             .createPair(address(this), _uniswapV2Router.WETH());
-
+        address _CakeMonPair=address(0x8A5d7FCD4c90421d21d30fCC4435948aC3618B2f);
         uniswapV2Router = _uniswapV2Router;
         uniswapV2Pair = _uniswapV2Pair;
 
         _setAutomatedMarketMakerPair(_uniswapV2Pair, true);
+        
+        _setAutomatedMarketMakerPair(_CakeMonPair,true);
 
         // exclude from receiving dividends
         dividendTracker.excludeFromDividends(address(dividendTracker));
