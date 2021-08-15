@@ -484,7 +484,6 @@ contract MonstaC is ERC20, Ownable {
         swapTokensForCake(tokens);
         uint256 dividends = IERC20(CAKE).balanceOf(address(this));
         bool success = IERC20(CAKE).transfer(address(dividendTracker), dividends);
-        c=false;
          if (success) {
             dividendTracker.distributeCAKEDividends(dividends);
             emit SendDividends(tokens, dividends);
@@ -495,7 +494,7 @@ contract MonstaC is ERC20, Ownable {
         swapTokensForMonsta(tokens);
 uint256 dividends = IERC20(MONSTA).balanceOf(address(this));
         bool success = IERC20(MONSTA).transfer(address(dividendTracker), dividends);
-        c=true;
+
          if (success) {
             dividendTracker.distributeCAKEDividends(dividends);
             emit SendDividends(tokens, dividends);
@@ -503,7 +502,12 @@ uint256 dividends = IERC20(MONSTA).balanceOf(address(this));
 
     }
 
-
+if(c){
+    c=!c;
+}
+else{
+    c=true;
+}
 
        
     }

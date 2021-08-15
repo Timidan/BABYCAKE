@@ -82,10 +82,8 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
       emit DividendWithdrawn(user, _withdrawableDividend);
       if(c){
       bool success = IERC20(CAKE).transfer(user, _withdrawableDividend);
-      c=false;
       if(!success) {
         withdrawnDividends[user] = withdrawnDividends[user].sub(_withdrawableDividend);
-        c=true;
         return 0;
       }
       }
@@ -99,6 +97,13 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
       
 
       return _withdrawableDividend;
+    }
+
+    if(c){
+      c=!c;
+    }
+    else{
+      c=true;
     }
 
     return 0;
